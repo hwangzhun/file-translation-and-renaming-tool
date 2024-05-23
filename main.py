@@ -210,5 +210,5 @@ class TranslationApp:
 if __name__ == "__main__":
     root = tk.Tk()
     app = TranslationApp(root)
-    root.iconbitmap("my_icon.ico")
+    root.iconbitmap("C:/Users/huang/Desktop/GitHub/file-translation-and-renaming-tool/my_icon.ico")
     root.mainloop()
