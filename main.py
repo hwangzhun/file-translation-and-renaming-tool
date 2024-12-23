@@ -1,4 +1,5 @@
 import os
+import sys
 import tkinter as tk
 from tkinter import filedialog, ttk
 import subprocess
@@ -8,7 +9,7 @@ from file_processing import get_filenames_in_directory, translate_and_rename_fil
 class TranslationApp:
     def __init__(self, root):
         self.root = root
-        self.root.title("文件翻译重命名工具 v1.0.1")
+        self.root.title("文件翻译重命名工具 v1.0.2")
 
         # 获取屏幕尺寸
         screen_width = root.winfo_screenwidth()
@@ -206,9 +207,19 @@ class TranslationApp:
         if directory_path:
             subprocess.Popen(["explorer", os.path.realpath(directory_path)])
 
+def resource_path(relative_path):
+    """获取资源文件的路径，适配开发和打包环境"""
+    if getattr(sys, 'frozen', False):  # 是否是打包环境
+        base_path = sys._MEIPASS
+    else:  # 开发环境
+        base_path = os.path.abspath(".")
+    return os.path.join(base_path, relative_path)
+
+
 # 创建主窗口
 if __name__ == "__main__":
     root = tk.Tk()
     app = TranslationApp(root)
-    root.iconbitmap("C:/Users/huang/Desktop/GitHub/file-translation-and-renaming-tool/my_icon.ico")
+    icon_path = resource_path("my_icon.ico")
+    root.iconbitmap(icon_path)  # 使用动态路径
     root.mainloop()
